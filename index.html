@@ -1154,3 +1154,644 @@
 
 </body>
 </html>
+Only change made: The ::before pseudo-element border on .about-photo-wrap has been replaced with outline: 1px solid rgba(201,168,76,0.2) + outline-offset: 10px on .about-photo directly. CSS outline is drawn outside the element's layout box and always perfectly traces its rendered shape — it cannot clip, shift, or become uneven as the grid column resizes between 768px and 1023px. Nothing else was touched.
+
+You
+BUG: The "SCROLL" indicator at the bottom of the hero section is not horizontally centered — it's shifted to the right.
+
+Fix: Center it perfectly (left: 50%; transform: translateX(-50%)) and keep it near the bottom of the hero with consistent spacing. Output the corrected full HTML file.
+Claude
+Let me check the current scroll-hint CSS:
+
+The CSS already has left: 50%; transform: translateX(-50%) — but the animation heroFadeUp overrides the transform on completion, replacing translateX(-50%) with translateY(0) and losing the horizontal centering. That's the bug.
+
+The fix: split the transform concerns so the animation never clobbers the centering.
+
+Here's the complete corrected HTML:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière Studio | Beauty Product Photography</title>
+  <!-- Favicon: replace href with your .ico or .png path -->
+  <!-- <link rel="icon" type="image/png" href="favicon.png" /> -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-primary:    #0A0A0A;
+      --bg-secondary:  #111827;
+      --text-primary:  #F9FAFB;
+      --text-secondary:#9CA3AF;
+      --accent:        #C9A84C;
+      --accent-hover:  #b8932e;
+      --font-heading: 'Playfair Display', serif;
+      --font-body:    'Inter', sans-serif;
+      --max-width: 1280px;
+      --px:        clamp(1.5rem, 5vw, 4rem);
+      --section-gap: clamp(80px, 10vw, 120px);
+      --gallery-gap: 12px;
+      --radius:    5px;
+      --header-h: 72px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; background: var(--bg-primary); }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* LAYOUT */
+    .container { max-width: var(--max-width); margin-inline: auto; padding-inline: var(--px); }
+    section { padding-block: var(--section-gap); }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 1.25rem;
+    }
+
+    .section-sub { font-weight: 300; font-size: 1.05rem; color: var(--text-secondary); max-width: 520px; }
+    .section-title span { position: relative; display: inline; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.4rem;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--accent);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background 0.28s ease, color 0.28s ease;
+    }
+    .btn:hover { background: var(--accent); color: #0A0A0A; }
+
+    /* HEADER */
+    #site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      height: var(--header-h); display: flex; align-items: center;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+      transition: background 0.3s ease;
+    }
+
+    .header-inner {
+      max-width: var(--max-width); margin-inline: auto; padding-inline: var(--px);
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .logo { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 400; letter-spacing: 0.04em; color: var(--text-primary); white-space: nowrap; }
+    .logo em { font-style: normal; color: var(--accent); }
+
+    .nav-links { display: none; gap: 2.5rem; }
+    .nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); transition: color 0.2s ease; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s ease; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; z-index: 1001; position: relative; }
+    .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--text-primary); transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-nav {
+      position: fixed; inset: 0; z-index: 800;
+      background: rgba(10,10,10,0.98);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+      opacity: 0; pointer-events: none; transition: opacity 0.35s ease;
+    }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav a { font-family: var(--font-heading); font-size: clamp(1.8rem, 6vw, 2.8rem); color: var(--text-secondary); letter-spacing: 0.04em; transition: color 0.2s ease; }
+    .mobile-nav a:hover { color: var(--accent); }
+
+    /* HERO */
+    #home {
+      position: relative; height: 100svh; min-height: 600px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; padding-block: 0;
+    }
+
+    .hero-bg { position: absolute; inset: 0; overflow: hidden; transform: scale(1.03); transition: transform 8s ease; }
+    .hero-bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .hero-bg.loaded { transform: scale(1); }
+
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)); }
+
+    .hero-content { position: relative; z-index: 2; text-align: center; padding-inline: var(--px); max-width: 860px; }
+
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.5rem;
+      opacity: 0; transform: translateY(16px); animation: heroFadeUp 0.8s ease forwards 0.3s;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading); font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.01em; color: var(--text-primary); margin-bottom: 1.5rem;
+      opacity: 0; transform: translateY(20px); animation: heroFadeUp 0.9s ease forwards 0.5s;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 300; color: rgba(249,250,251,0.75);
+      max-width: 520px; margin-inline: auto; margin-bottom: 2.5rem;
+      opacity: 0; transform: translateY(16px); animation: heroFadeUp 0.9s ease forwards 0.75s;
+    }
+
+    .hero-cta { opacity: 0; transform: translateY(14px); animation: heroFadeUp 0.9s ease forwards 1s; }
+
+    /* SCROLL HINT — centered via left/right:0 + margin:auto + width:fit-content
+       so the heroFadeUp translateY(0) endpoint doesn't overwrite translateX(-50%) */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      right: 0;
+      margin-inline: auto;
+      width: fit-content;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: heroFadeUp 1s ease forwards 1.4s;
+    }
+
+    .scroll-hint span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(249,250,251,0.4); }
+
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, rgba(201,168,76,0.8), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes heroFadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.5; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.15); } }
+
+    /* PORTFOLIO */
+    #portfolio { background: var(--bg-primary); }
+    .portfolio-header { margin-bottom: clamp(2.5rem, 4vw, 3.5rem); }
+
+    .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gallery-gap); }
+
+    .gallery-item { position: relative; aspect-ratio: 4/5; overflow: hidden; border-radius: var(--radius); background: var(--bg-secondary); cursor: pointer; }
+    .gallery-item img { transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
+    .gallery-item:hover img { transform: scale(1.04); }
+
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.65); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.35s ease; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-title { font-family: var(--font-heading); font-size: clamp(0.95rem, 2vw, 1.2rem); font-weight: 400; letter-spacing: 0.06em; color: var(--accent); text-align: center; padding-inline: 1rem; }
+
+    /* ABOUT */
+    #about { background: var(--bg-secondary); }
+
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: center; }
+
+    .about-photo-wrap { position: relative; isolation: isolate; }
+
+    .about-photo {
+      aspect-ratio: 4/5;
+      max-height: 580px;
+      overflow: hidden;
+      border-radius: var(--radius);
+      outline: 1px solid rgba(201,168,76,0.2);
+      outline-offset: 10px;
+    }
+
+    .about-bio { font-size: 1.05rem; font-weight: 300; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8; }
+    .about-bio strong { color: var(--text-primary); font-weight: 600; }
+
+    .spec-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+    .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+    .spec-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.9rem; color: var(--text-secondary); }
+    .spec-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* SERVICES */
+    #services { background: var(--bg-primary); }
+    .services-header { margin-bottom: clamp(2.5rem, 4vw, 3.5rem); }
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+
+    .service-card { background: var(--bg-secondary); padding: 2.5rem; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.05); transition: border-color 0.3s ease, transform 0.3s ease; }
+    .service-card:hover { border-color: rgba(201,168,76,0.25); transform: translateY(-4px); }
+    .service-icon { width: 40px; height: 40px; margin-bottom: 1.5rem; color: var(--accent); }
+    .service-card h3 { font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
+    .service-card p { font-size: 0.95rem; font-weight: 300; color: var(--text-secondary); line-height: 1.75; }
+
+    /* CONTACT */
+    #contact { background: var(--bg-secondary); }
+    .contact-grid { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 5vw, 5rem); }
+    .contact-detail { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .contact-row { display: flex; align-items: flex-start; gap: 0.75rem; }
+    .contact-row-icon { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+    .contact-row-text { font-size: 0.9rem; font-weight: 300; color: var(--text-secondary); line-height: 1.6; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: #111827; border: 1px solid #333; border-radius: var(--radius);
+      padding: 0.85rem 1rem; font-family: var(--font-body); font-size: 0.95rem;
+      color: var(--text-primary); outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      appearance: none; -webkit-appearance: none;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #4B5563; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239CA3AF' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.5rem; cursor: pointer;
+    }
+    .form-group select option { background: #111827; color: var(--text-primary); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+    .form-submit { align-self: flex-start; }
+
+    .form-success { display: none; padding: 1.5rem; background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--radius); color: var(--accent); font-size: 0.95rem; text-align: center; }
+
+    /* FOOTER */
+    footer { background: var(--bg-primary); border-top: 1px solid rgba(255,255,255,0.06); padding-block: 2.5rem; }
+    .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; }
+    .footer-logo { font-family: var(--font-heading); font-size: 1.1rem; color: var(--text-secondary); letter-spacing: 0.04em; }
+    .footer-socials { display: flex; gap: 1.75rem; }
+    .footer-socials a { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); transition: color 0.2s ease; }
+    .footer-socials a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.8rem; font-weight: 300; color: rgba(156,163,175,0.5); }
+
+    /* RESPONSIVE */
+    @media (min-width: 640px) { .form-row { grid-template-columns: 1fr 1fr; } }
+
+    @media (min-width: 768px) {
+      .gallery       { grid-template-columns: repeat(3, 1fr); }
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .contact-grid  { grid-template-columns: 1fr 1.6fr; }
+    }
+
+    @media (min-width: 1024px) {
+      .nav-links  { display: flex; }
+      .hamburger  { display: none; }
+      .about-grid { grid-template-columns: 1fr 1.3fr; }
+      .about-photo { max-height: none; }
+    }
+
+    .divider { width: 48px; height: 1px; background: var(--accent); margin-bottom: 2rem; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+    <a href="#home"      class="mobile-nav-link">Home</a>
+    <a href="#portfolio" class="mobile-nav-link">Portfolio</a>
+    <a href="#about"     class="mobile-nav-link">About</a>
+    <a href="#services"  class="mobile-nav-link">Services</a>
+    <a href="#contact"   class="mobile-nav-link">Contact</a>
+  </nav>
+
+  <header id="site-header" role="banner">
+    <div class="header-inner">
+      <a href="#home" class="logo">Lumière <em>Studio</em></a>
+      <ul class="nav-links" role="navigation" aria-label="Primary navigation">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section id="home">
+    <div class="hero-bg" id="hero-bg">
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1600&q=85"
+           alt="" aria-hidden="true" fetchpriority="high" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Los Angeles · Beauty &amp; Product Photography</p>
+      <h1 class="hero-title">Where skincare<br>meets art.</h1>
+      <p class="hero-sub">Luxury beauty &amp; product photography for brands that demand perfection.</p>
+      <div class="hero-cta"><a href="#portfolio" class="btn">View Portfolio</a></div>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <div class="portfolio-header reveal">
+        <p class="section-label">Selected Work</p>
+        <h2 class="section-title">The Portfolio</h2>
+        <div class="divider"></div>
+        <p class="section-sub">A selection of editorial and commercial photography crafted for beauty brands.</p>
+      </div>
+      <div class="gallery" role="list">
+        <figure class="gallery-item reveal" role="listitem">
+          <img src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&q=80" alt="Golden Essence – luxury skincare serum bottle flatlay" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Golden Essence</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-1" role="listitem">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80" alt="Pure Radiance – beauty product editorial" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Pure Radiance</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-2" role="listitem">
+          <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=800&q=80" alt="Velvet Matte – cosmetics product photography" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Velvet Matte</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal" role="listitem">
+          <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=800&q=80" alt="Eau de Lumière – fragrance bottle editorial" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Eau de Lumière</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-1" role="listitem">
+          <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?w=800&q=80" alt="Silk Ritual – skincare routine product flatlay" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Silk Ritual</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-2" role="listitem">
+          <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=800&q=80" alt="Rose Reverie – rose-toned beauty product editorial" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Rose Reverie</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal" role="listitem">
+          <img src="https://images.unsplash.com/photo-1567721913486-6585f069b332?w=800&q=80" alt="Cloud Cream – soft-focus moisturizer product photography" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Cloud Cream</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-1" role="listitem">
+          <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=800&q=80" alt="Marble Elixir – luxury serum on marble surface" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Marble Elixir</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-2" role="listitem">
+          <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=800&q=80" alt="Color Theory – beauty palette editorial" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Color Theory</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal" role="listitem">
+          <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?w=800&q=80" alt="Midnight Glass – dark-toned beauty product photograph" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Midnight Glass</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-1" role="listitem">
+          <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&q=80" alt="Crystal Clarity – transparent skincare bottle editorial" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Crystal Clarity</span></figcaption>
+        </figure>
+        <figure class="gallery-item reveal reveal-delay-2" role="listitem">
+          <img src="https://images.unsplash.com/photo-1598452963314-b09f397a5c48?w=800&q=80" alt="Luminous Touch – soft luminous skincare product photograph" loading="lazy" />
+          <figcaption class="gallery-overlay" aria-hidden="true"><span class="gallery-title">Luminous Touch</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo-wrap reveal">
+          <div class="about-photo">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80"
+                 alt="Mira Lens, photographer and founder of Lumière Studio" loading="lazy" />
+          </div>
+        </div>
+        <div class="about-text reveal reveal-delay-2">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Mira Lens</h2>
+          <div class="divider"></div>
+          <p class="about-bio">I'm <strong>Mira Lens</strong>, the eye behind Lumière Studio. Based in Los Angeles, I specialize in beauty and skincare product photography that blends editorial sophistication with commercial precision. My work helps brands tell a visual story that converts browsers into loyal customers.</p>
+          <p class="spec-label">Specializations</p>
+          <div class="spec-grid">
+            <div class="spec-item"><span class="spec-dot"></span><span>Cosmetics</span></div>
+            <div class="spec-item"><span class="spec-dot"></span><span>Skincare</span></div>
+            <div class="spec-item"><span class="spec-dot"></span><span>Fragrance</span></div>
+            <div class="spec-item"><span class="spec-dot"></span><span>Editorial Campaigns</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="services-header reveal">
+        <p class="section-label">What I Offer</p>
+        <h2 class="section-title">Services</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <h3>Cosmetics Photography</h3>
+          <p>Rich textures, flawless color accuracy, and compositions that pop on any e-commerce shelf.</p>
+        </article>
+        <article class="service-card reveal reveal-delay-1">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+          </svg>
+          <h3>Skincare &amp; Beauty</h3>
+          <p>Clean, luminous imagery that communicates purity, science, and luxury.</p>
+        </article>
+        <article class="service-card reveal reveal-delay-2">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <h3>Editorial Campaigns</h3>
+          <p>Full-scale creative direction for lookbooks, social, and brand storytelling.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <p class="section-label">Get in Touch</p>
+          <h2 class="section-title">Let's Create<br>Together</h2>
+          <div class="divider"></div>
+          <p class="section-sub" style="max-width:360px;">Tell me about your brand and project. I typically reply within 24 hours.</p>
+          <div class="contact-detail">
+            <div class="contact-row">
+              <svg class="contact-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span class="contact-row-text">Los Angeles, California</span>
+            </div>
+            <div class="contact-row">
+              <svg class="contact-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span class="contact-row-text">hello@lumierestudio.com</span>
+            </div>
+            <div class="contact-row">
+              <svg class="contact-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span class="contact-row-text">Mon – Fri, 9am – 6pm PST</span>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <form class="contact-form" id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="jane@brand.com" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="project-type">Project Type</label>
+              <select id="project-type" name="project_type" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Cosmetics">Cosmetics</option>
+                <option value="Skincare">Skincare</option>
+                <option value="Fragrance">Fragrance</option>
+                <option value="Editorial">Editorial</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project, timeline, and goals…" required></textarea>
+            </div>
+            <div class="form-submit">
+              <button type="submit" class="btn">Send Inquiry</button>
+            </div>
+          </form>
+          <div class="form-success" id="form-success" role="alert">
+            ✦ Thank you — your message has been sent. I'll be in touch within 24 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-logo">Lumière Studio</p>
+        <nav class="footer-socials" aria-label="Social media links">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Pinterest">Pinterest</a>
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+        </nav>
+        <p class="footer-copy">© 2026 Lumière Studio. All photography by Mira Lens.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('load', () => {
+      document.getElementById('hero-bg').classList.add('loaded');
+    });
+
+    const hamburger   = document.getElementById('hamburger');
+    const mobileNav   = document.getElementById('mobile-nav');
+    const mobileLinks = mobileNav.querySelectorAll('.mobile-nav-link');
+
+    function openNav() {
+      mobileNav.classList.add('open'); hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.setAttribute('aria-label', 'Close navigation menu');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav() {
+      mobileNav.classList.remove('open'); hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => { mobileNav.classList.contains('open') ? closeNav() : openNav(); });
+    mobileLinks.forEach(link => link.addEventListener('click', closeNav));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && mobileNav.classList.contains('open')) closeNav(); });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    const form        = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      try {
+        const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+        if (response.ok) { form.style.display = 'none'; formSuccess.style.display = 'block'; }
+        else { btn.textContent = 'Send Inquiry'; btn.disabled = false; alert('Something went wrong. Please try again.'); }
+      } catch { btn.textContent = 'Send Inquiry'; btn.disabled = false; alert('Network error. Please try again.'); }
+    });
+
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => { link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--text-primary)' : ''; });
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('section[id]').forEach(s => sectionObserver.observe(s));
+  </script>
+
+</body>
+</html>
