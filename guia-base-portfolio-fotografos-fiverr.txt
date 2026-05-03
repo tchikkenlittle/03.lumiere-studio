@@ -1,0 +1,793 @@
+GUIA BASE — Portfólios para Fotógrafos de Produto no Fiverr
+Do primeiro protótipo até o gig publicado e vendendo
+Versão 1.0 | Maio de 2026
+
+
+=============================================================
+ÍNDICE RÁPIDO
+=============================================================
+
+ 1. O Nicho e Por Que Ele
+ 2. Perfil do Seu Cliente Ideal
+ 3. O Que o Site Precisa Ter
+ 4. Identidade Visual — Padrão do Nicho
+ 5. Stack Técnico — O Que Usar
+ 6. Estrutura do Site (Arquitetura de Páginas)
+ 7. Protótipo: Roteiro do Primeiro Modelo
+ 8. Criando os 3 Portfólios Demo Fictícios
+ 9. Recursos Gratuitos para os Demos
+10. Estrutura dos Pacotes e Preços
+11. Montando o Gig no Fiverr — Passo a Passo
+12. Títulos, Tags e Keywords
+13. Texto da Descrição do Gig
+14. Estratégia dos Primeiros 90 Dias
+15. Checklist de Qualidade Antes de Entregar
+16. Armadilhas e Como Evitar
+17. Referências Rápidas de Design
+
+
+=============================================================
+1. O NICHO E POR QUE ELE
+=============================================================
+
+Nicho escolhido: Sites de portfólio para fotógrafos de produto e e-commerce.
+
+O mercado-alvo são fotógrafos que atendem marcas Shopify, Amazon, Instagram
+DTC, cosméticos, moda, eletrônicos e alimentos embalados. O e-commerce global
+está em expansão acelerada — mais de 68% das listagens de produto exigem fotos
+profissionais, o que cria uma demanda estrutural crescente por fotógrafos que
+precisam de presença digital para conquistar contratos maiores.
+
+Por que este nicho é o melhor ponto de entrada:
+
+- O cliente tem mentalidade de negócio. Ele mede ROI. Briefings mais claros,
+  menos drama emocional, menos revisões subjetivas.
+- A concorrência de gigs específicos no Fiverr é baixa. Há muitos gigs
+  genéricos de "fotógrafo portfolio", mas poucos especializados neste nicho.
+- A estética do nicho é totalmente executável com HTML/CSS/JS puro. Dark mode,
+  grids limpos e hover effects são vibe coding puro.
+- Fotógrafos de produto atualizam portfólio frequentemente, gerando demanda
+  por atualizações recorrentes — ou seja, clientes que voltam.
+
+O argumento central de venda para o cliente:
+
+"Você fotografa produtos para marcas premium. Seu site precisa fazer o mesmo —
+apresentar seu trabalho como uma marca premium apresenta seus produtos. Eu
+construo isso com código limpo, rápido e sem os compromissos de qualidade dos
+construtores de sites genéricos."
+
+
+=============================================================
+2. PERFIL DO SEU CLIENTE IDEAL
+=============================================================
+
+Quem é esse fotógrafo:
+
+- Freelancer ou pequeno estúdio, geralmente 1 a 3 pessoas
+- Trabalha com marcas de e-commerce: moda, beleza, eletrônicos, alimentos,
+  utensílios domésticos
+- Tem perfil no Instagram, mas o portfólio online é fraco ou inexistente
+- Busca clientes no Fiverr, LinkedIn ou por indicação
+- Fatura entre US$ 2.000 e US$ 15.000 por mês
+- Sabe que um site profissional atrairia clientes maiores
+- Está acostumado a pagar por ferramentas e serviços (Adobe CC, estúdio,
+  equipamento)
+
+O que ele quer do site:
+
+- Que as fotos sejam as estrelas — nada competindo com elas visualmente
+- Credibilidade imediata para marcas que pesquisam o fotógrafo online
+- Um lugar claro para apresentar seus serviços e preços
+- Formulário fácil de contato e pedido de orçamento
+- Carregamento rápido (marcas acessam de desktop, muitas vezes em WiFi
+  corporativo)
+
+O que ele NÃO quer:
+
+- Templates genéricos que qualquer fotógrafo tem
+- Sites lentos cheios de plugins
+- Design que compete visualmente com as fotos
+- Processo complicado de atualização de conteúdo
+
+
+=============================================================
+3. O QUE O SITE PRECISA TER
+=============================================================
+
+FUNCIONALIDADES OBRIGATÓRIAS (todo pacote)
+
+- Header fixo com logo e navegação
+- Hero section full-screen com imagem de destaque e headline
+- Galeria com efeito de hover (zoom suave e overlay com título do projeto)
+- Seção "Sobre" com mini bio e especialidades
+- Seção de Serviços (o que oferece, para quais categorias de produto)
+- Formulário de Contato funcional (pode usar Formspree.io, gratuito)
+- Footer com links de redes sociais
+- 100% responsivo (mobile, tablet, desktop)
+- Imagens com lazy loading
+
+FUNCIONALIDADES DO PACOTE STANDARD E ACIMA
+
+- Galeria categorizada (ex: Cosméticos / Moda / Eletrônicos)
+- Seção de Logos de Clientes ("Já trabalhei com:")
+- Depoimentos de clientes
+- Animações de scroll suave via Intersection Observer API
+- Dark mode toggle (diferenciador forte)
+
+FUNCIONALIDADES DO PACOTE PREMIUM
+
+- Case studies completos (3 projetos detalhados com contexto e resultado)
+- Tabela de Pacotes e Preços do fotógrafo
+- Instagram feed ao vivo (via widget embed, sem API)
+- Formulário de orçamento estruturado com campos específicos
+- Blog básico (3 posts estáticos em HTML)
+- Meta tags de SEO on-page
+
+
+=============================================================
+4. IDENTIDADE VISUAL — PADRÃO DO NICHO
+=============================================================
+
+Esta é a linguagem visual que o mercado de fotografia de produto entende como
+"premium". Use como padrão nos seus templates.
+
+PALETA DE CORES (Dark Mode — Default)
+
+  Fundo principal:     #0A0A0A  (preto profundo)
+  Fundo secundário:    #111827  (cinza escuro para seções alternadas)
+  Texto primário:      #F9FAFB  (branco suave)
+  Texto secundário:    #9CA3AF  (cinza médio para subtítulos e body)
+
+  Accent — personalize por cliente:
+  → Dourado/Luxo:      #C9A84C
+  → Sage/Clean:        #6B8F71
+  → Coral/Moderno:     #E07A5F
+  → Azul/Tech:         #3B82F6
+
+TIPOGRAFIA
+
+  Títulos (H1, H2):    Playfair Display ou Cormorant Garamond
+                       (serif, editorial, sensação premium)
+  Subtítulos (H3):     DM Sans SemiBold ou Inter SemiBold
+  Corpo de texto:      Inter Regular ou DM Sans Regular
+
+  Importar via Google Fonts:
+  Playfair Display (wght 400;700) + Inter (wght 300;400;600)
+
+LAYOUT E ESPAÇAMENTO
+
+  Container máximo:    1280px
+  Padding lateral:     clamp(1.5rem, 5vw, 4rem) — responsivo automático
+  Espaço entre seções: 120px desktop / 80px mobile
+  Gap de galeria:      8px a 16px (grid apertado = sensação editorial)
+  Border-radius:       4px a 8px (evitar cards arredondados demais)
+
+EFEITOS E ANIMAÇÕES
+
+  Hover na galeria: a imagem faz scale(1.03) com transição de 0.4s e um
+  overlay escuro (rgba 0,0,0,0.6) aparece com opacity de 0 para 1 em 0.3s,
+  mostrando o título do projeto.
+
+  Fade-in ao scroll: elementos começam com opacity 0 e translateY(30px),
+  e quando entram na viewport via Intersection Observer recebem a classe
+  "visible" que transiciona para opacity 1 e translateY(0) em 0.6s.
+
+
+=============================================================
+5. STACK TÉCNICO — O QUE USAR
+=============================================================
+
+O que você produz e por que é vantagem:
+
+  HTML5 semântico    → Base de tudo. Sites mais leves e melhor SEO que
+                        WordPress.
+  CSS3 puro          → Estilo e animações sem dependências externas.
+  Vanilla JavaScript → Interatividade sem jQuery nem overhead desnecessário.
+  Formspree.io       → Formulários funcionais, gratuito, sem backend.
+  Google Fonts       → Tipografia sem custo.
+
+O que NÃO usar e por quê:
+
+  WordPress          → Pesado, lento, vulnerável. Foge do seu diferencial.
+  Bootstrap completo → Carrega CSS desnecessário, visual genérico.
+  jQuery             → Obsoleto para o que você precisa.
+  GSAP/Three.js      → Overkill para pacotes Basic e Standard.
+  Wix / Squarespace  → Isso é o que você está substituindo. Nunca entregue.
+
+Hospedagem gratuita para indicar ao cliente:
+
+  1. Netlify — drag & drop da pasta, HTTPS automático. Recomendado.
+  2. GitHub Pages — perfeito para quem tem conta GitHub.
+  3. Vercel — alternativa sólida, igual ao Netlify em facilidade.
+
+
+=============================================================
+6. ESTRUTURA DO SITE (ARQUITETURA DE PÁGINAS)
+=============================================================
+
+PACOTE BASIC (1 página — Landing Page)
+
+  index.html
+    - Header com logo e navegação por âncoras
+    - Hero com imagem full-screen e CTA
+    - Galeria em grid 3 colunas (12 a 20 imagens)
+    - Seção Sobre com foto e bio curta
+    - Serviços em 3 cards
+    - Formulário de contato
+    - Footer
+
+PACOTE STANDARD (até 5 páginas)
+
+  index.html     → Home com hero e destaques
+  portfolio.html → Galeria categorizada com 3 abas ou filtros
+  about.html     → Bio completa, filosofia, equipamentos
+  services.html  → Serviços detalhados e logos de clientes
+  contact.html   → Formulário e links sociais
+
+PACOTE PREMIUM (tudo do Standard mais:)
+
+  case-study-1.html  → Projeto detalhado (marca, desafio, resultado)
+  case-study-2.html
+  case-study-3.html
+  pricing.html       → Tabela de pacotes do fotógrafo
+  blog/post-1.html   → 3 posts estáticos de blog
+  blog/post-2.html
+  blog/post-3.html
+
+
+=============================================================
+7. PROTÓTIPO: ROTEIRO DO PRIMEIRO MODELO
+=============================================================
+
+FASE 1 — PLANEJAMENTO (30 min)
+
+  - Decida a identidade do fotógrafo fictício (nome, especialidade, cidade).
+    Exemplo: "Mira Lens Studio — Product Photography for Beauty Brands | NY"
+  - Escolha a cor accent (dourado, sage, coral ou azul)
+  - Selecione 12 a 16 fotos do Unsplash que representem o estilo
+  - Escreva 3 a 5 frases de headline e bio (use IA para ajudar)
+
+FASE 2 — VIBE CODING DO HTML BASE (1 a 2 horas)
+
+  Prompt modelo para usar no seu AI:
+
+  "Crie um site de portfólio de página única para um fotógrafo de produto
+  de e-commerce chamado [NOME]. O design deve ser dark mode (fundo #0A0A0A),
+  com tipografia Playfair Display para títulos e Inter para corpo. Inclua:
+  header fixo com logo e nav, hero full-screen, galeria em grid 3 colunas com
+  hover overlay, seção sobre, seção de serviços com 3 cards, e formulário de
+  contato. HTML + CSS + JS em arquivo único. Sem frameworks externos.
+  Responsivo mobile-first."
+
+FASE 3 — REFINAMENTO VISUAL (1 a 2 horas)
+
+  - Substitua imagens placeholder por fotos reais do Unsplash
+  - Ajuste cores do accent para combinar com as fotos escolhidas
+  - Revise tipografia: tamanhos, pesos, espaçamento de linha
+  - Adicione animações de scroll com Intersection Observer
+  - Ajuste espaçamento entre seções (mínimo 80px mobile)
+  - Verifique contraste de acessibilidade (texto vs. fundo)
+
+FASE 4 — TESTES DE RESPONSIVIDADE (30 a 45 min)
+
+  Abra o Chrome DevTools (F12) → Toggle Device Toolbar e teste:
+
+  375px  → Mobile pequeno: texto não cortado, galeria em 1 coluna, nav ok
+  414px  → Mobile médio: mesmos checks
+  768px  → Tablet: galeria em 2 colunas, layout intermediário
+  1280px → Desktop: layout completo, sem estiramentos
+  1440px → Wide: container máximo respeitado
+
+FASE 5 — DEPLOY DO DEMO (15 min)
+
+  - Crie conta gratuita no Netlify (netlify.com)
+  - Faça drag & drop da pasta do site
+  - Copie o link público gerado (ex: mira-lens.netlify.app)
+  - Use esse link nas imagens de capa do gig no Fiverr
+
+
+=============================================================
+8. CRIANDO OS 3 PORTFÓLIOS DEMO FICTÍCIOS
+=============================================================
+
+Você precisa de 3 demos visualmente distintos para o portfólio do gig no
+Fiverr. Isso demonstra versatilidade e cria prova de trabalho sem precisar
+de clientes reais.
+
+DEMO 1 — Estúdio de Cosméticos e Beleza
+
+  Nome:          Lumière Studio
+  Localização:   Los Angeles, CA
+  Especialidade: Beauty & Skincare Product Photography
+  Accent:        #C9A84C (dourado)
+  Estilo:        Dark luxury, frascos com reflexos metálicos
+  Unsplash:      buscar "cosmetics photography", "perfume product"
+  Headline:      "Where skincare meets art."
+
+DEMO 2 — Fotografia de Moda e Lifestyle para DTC
+
+  Nome:          FORME Visual
+  Localização:   Berlin, DE
+  Especialidade: Fashion & Apparel for DTC Brands
+  Accent:        #6B8F71 (sage/verde)
+  Estilo:        Clean, minimalista, muito espaço negativo
+  Unsplash:      buscar "fashion product photography", "clothing flatlay"
+  Headline:      "Product photography that converts browsers into buyers."
+
+DEMO 3 — Fotografia de Eletrônicos e Tech
+
+  Nome:          Aperture.lab
+  Localização:   Tokyo, JP
+  Especialidade: Tech & Consumer Electronics Photography
+  Accent:        #3B82F6 (azul elétrico)
+  Estilo:        Fundo preto absoluto, iluminação de rim, estética Apple-like
+  Unsplash:      buscar "electronics photography", "tech product studio"
+  Headline:      "Precision photography for precision products."
+
+
+=============================================================
+9. RECURSOS GRATUITOS PARA OS DEMOS
+=============================================================
+
+IMAGENS (uso comercial gratuito)
+
+  Unsplash   → unsplash.com       (qualidade editorial, enorme variedade)
+  Pexels     → pexels.com         (boa alternativa, mais neutro)
+  StockSnap  → stocksnap.io       (menor volume, boa curadoria)
+
+  Termos de busca recomendados no Unsplash:
+  - product photography studio
+  - cosmetics flatlay
+  - tech electronics dark background
+  - fashion clothing minimal
+  - food product packaging
+
+ÍCONES E UI
+
+  Heroicons       → heroicons.com       (SVG gratuito, estilo limpo)
+  Phosphor Icons  → phosphoricons.com   (alternativa excelente)
+  Feather Icons   → feathericons.com    (minimalista, ideal para o nicho)
+
+FONTES
+
+  Google Fonts → fonts.google.com
+  Usar: Playfair Display, Inter, DM Sans, Cormorant Garamond
+
+FORMULÁRIOS
+
+  Formspree → formspree.io
+  Gratuito até 50 submissions por mês, sem necessidade de backend.
+
+DEPLOY
+
+  Netlify       → netlify.com      (gratuito, HTTPS, drag & drop)
+  GitHub Pages  → pages.github.com (gratuito, integrado ao Git)
+
+COMPRESSÃO DE IMAGENS
+
+  Squoosh → squoosh.app   (gratuito, comprime sem perda visível)
+  Meta: menos de 200kb por imagem de galeria.
+
+TESTE DE PERFORMANCE
+
+  PageSpeed Insights → pagespeed.web.dev   (meta: pontuação 80 ou mais)
+
+
+=============================================================
+10. ESTRUTURA DOS PACOTES E PREÇOS
+=============================================================
+
+PACOTE BASIC — "The Studio Starter" — US$ 150
+
+  - 1 página (landing page completa)
+  - Galeria com até 20 fotos
+  - Animações básicas (fade e hover)
+  - Formulário de contato simples
+  - Mobile responsivo
+  - Código-fonte entregue
+  - Instruções de hospedagem
+  - 2 rodadas de revisão
+  - Prazo: 5 dias
+
+PACOTE STANDARD — "The Pro Portfolio" — US$ 320
+
+  - Até 5 páginas
+  - 3 categorias de galeria
+  - Animações de scroll reveal
+  - Dark mode toggle
+  - Seção de logos de clientes
+  - 3 depoimentos
+  - Formulário de orçamento estruturado
+  - 3 rodadas de revisão
+  - Prazo: 8 dias
+
+PACOTE PREMIUM — "The Brand Studio" — US$ 550
+
+  - Até 8 páginas
+  - Tudo do Standard mais:
+  - 3 case studies completos
+  - Tabela de preços do fotógrafo
+  - Instagram feed embed
+  - Formulário de orçamento completo com campos por tipo de produto
+  - SEO on-page básico (meta tags, open graph)
+  - 5 rodadas de revisão
+  - Prazo: 14 dias
+
+GIG EXTRAS (add-ons)
+
+  Galeria adicional (+ 1 categoria)         → +US$ 50
+  Seção de vídeo / showreel embed           → +US$ 80
+  Seção before/after interativa             → +US$ 100
+  Entrega expressa (50% menos prazo)        → +US$ 40
+  Copy/texto do site escrito e revisado     → +US$ 60
+  Post de blog extra                        → +US$ 30 por post
+
+REGRA DE OURO
+
+Nunca abaixo de US$ 120. Preço sinaliza qualidade no Fiverr. Abaixo disso
+você atrai clientes problemáticos e compete com quem usa templates de US$ 9.
+Você não está vendendo um template — está vendendo um ativo de negócio
+personalizado.
+
+
+=============================================================
+11. MONTANDO O GIG NO FIVERR — PASSO A PASSO
+=============================================================
+
+PRÉ-REQUISITOS ANTES DE CRIAR O GIG
+
+  - 3 demos prontos e hospedados (Netlify ou GitHub Pages)
+  - Screenshots de qualidade dos 3 demos em 3 dispositivos
+  - Vídeo de 60 a 90 segundos navegando pelos demos (use Loom, gratuito)
+  - Conta no Fiverr criada com perfil 100% preenchido
+
+CONFIGURAÇÃO DO GIG
+
+  Categoria:     Programming & Tech → Website Development → Website Design
+  Sub-categoria: Portfolio Website
+
+IMAGENS DE CAPA DO GIG (obrigatórias — 3 imagens + 1 vídeo)
+
+  Imagem 1: Screenshot do demo mais impactante em desktop
+  Imagem 2: Composição mostrando os 3 demos lado a lado
+  Imagem 3: Versão mobile dos demos (demonstra responsividade)
+  Vídeo:    Navegação real pelos sites (60 a 90 segundos)
+
+THUMBNAIL IDEAL
+
+  - Fundo escuro (alinhado com sua estética)
+  - Texto sobreposto: "Portfolio Websites for Product Photographers"
+  - Destaques visuais nos elementos mais bonitos do design
+
+
+=============================================================
+12. TÍTULOS, TAGS E KEYWORDS
+=============================================================
+
+TÍTULOS RECOMENDADOS (escolha 1 para o gig principal)
+
+  Opção A — Mais direta:
+  "I Will Design a Stunning Dark Portfolio Website for Product Photographers"
+
+  Opção B — Com palavra de nicho forte:
+  "I Will Build a Custom HTML Portfolio Website for E-Commerce Product
+  Photographers"
+
+  Opção C — Orientada ao cliente final do fotógrafo:
+  "I Will Create a Professional Portfolio Site for Product Photographers
+  Serving Shopify Brands"
+
+TAGS (Fiverr permite 5 — escolha as mais relevantes)
+
+  product photographer website
+  photography portfolio website
+  ecommerce photographer site
+  custom html portfolio
+  dark mode portfolio website
+  commercial photographer website
+  studio photographer website
+
+PALAVRAS-CHAVE PARA USAR NA DESCRIÇÃO
+
+  product photographer portfolio
+  ecommerce photography website
+  commercial photography portfolio
+  studio website design
+  HTML portfolio website
+  dark mode website photographer
+
+
+=============================================================
+13. TEXTO DA DESCRIÇÃO DO GIG
+=============================================================
+
+Use esta estrutura em inglês (idioma padrão do Fiverr):
+
+---
+
+ARE YOU A PRODUCT PHOTOGRAPHER WHO LOSES CLIENTS
+BECAUSE YOUR WEBSITE DOESN'T MATCH YOUR WORK?
+
+You shoot for premium e-commerce brands.
+Your images are stunning.
+But your website looks outdated or generic.
+
+That mismatch is costing you contracts every week.
+
+────────────────────────────
+WHAT I DO
+────────────────────────────
+
+I design sleek, dark-mode HTML portfolio websites built
+specifically for product & commercial photographers.
+
+Not templates. Not WordPress. Pure code — fast, custom,
+and built to make your photos the hero of every page.
+
+────────────────────────────
+WHY HTML BEATS SQUARESPACE
+────────────────────────────
+
+→ 3x faster loading (no plugins, no bloat)
+→ Fully customizable — pixel perfect to your brand
+→ You own the code forever (no monthly subscriptions)
+→ Better SEO performance out of the box
+
+────────────────────────────
+WHAT YOU GET (all packages)
+────────────────────────────
+
+✔ Mobile-first responsive design
+✔ Full-screen hero with your best image
+✔ High-resolution image gallery with hover effects
+✔ Contact / booking form (ready to receive inquiries)
+✔ Clean source code delivered to you
+✔ Free hosting setup instructions (Netlify/GitHub Pages)
+
+────────────────────────────
+MY PROCESS
+────────────────────────────
+
+Day 1: You share your photos, brand colors, and bio
+Day 2–4: I design + build your site
+Day 5: First preview + revision round
+Final: Clean delivery with all files
+
+────────────────────────────
+BEFORE YOU ORDER
+────────────────────────────
+
+Message me first. I want to understand your brand before
+I build a single line of code. I reply within 2 hours.
+
+Let's build a website as good as your photography.
+
+---
+
+
+=============================================================
+14. ESTRATÉGIA DOS PRIMEIROS 90 DIAS
+=============================================================
+
+SEMANA 1 E 2 — Construção da Base
+
+  - Criar os 3 demos fictícios e hospedar online
+  - Criar conta no Fiverr com perfil completo (foto, bio, skills)
+  - Gravar vídeo de apresentação dos demos com Loom
+  - Publicar o gig com todas as imagens e o vídeo
+
+SEMANA 3 E 4 — Conseguir as Primeiras Reviews
+
+  Estratégia de lançamento:
+  Ofereça 1 a 2 projetos por US$ 49 a 79 (abaixo do preço final) apenas
+  para conseguir as primeiras 3 a 5 avaliações positivas.
+  Mencione na descrição: "I'm building my portfolio — limited spots at a
+  launch price."
+  Entregue com nível de qualidade Premium mesmo no preço de Basic.
+  Ao final, peça avaliação de forma direta e educada.
+
+  Onde encontrar clientes fora do Fiverr no início:
+  - Reddit: r/photography, r/ecommerce, r/entrepreneur
+  - Facebook Groups: "Product Photography", "Amazon FBA Sellers"
+  - Instagram: comente em posts de fotógrafos com portfólio fraco
+
+MÊS 2 — Otimização
+
+  - Analise as perguntas mais recebidas e atualize a descrição do gig
+  - Suba o preço Basic para US$ 150 após 5 reviews positivas
+  - Adicione o pacote Standard formalmente
+  - Crie um segundo gig focado no Premium
+
+MÊS 3 — Escala
+
+  - Ative o pacote Premium (US$ 550)
+  - Crie Gig Extras baseados no que os clientes mais pedem
+  - Identifique qual sub-nicho converte mais (cosméticos? moda? tech?)
+  - Peça depoimentos em texto para usar nas imagens do gig
+
+META DE RECEITA DOS PRIMEIROS 90 DIAS
+
+  Mês 1: 3 a 4 vendas a preço de lançamento       → US$ 150 a 300
+  Mês 2: 4 a 6 vendas (Basic e Standard)          → US$ 600 a 1.200
+  Mês 3: 5 a 8 vendas (mix de pacotes)            → US$ 1.000 a 2.500
+
+
+=============================================================
+15. CHECKLIST DE QUALIDADE ANTES DE ENTREGAR
+=============================================================
+
+HTML E CÓDIGO
+
+  - HTML validado em validator.w3.org
+  - Sem erros no console do navegador (F12 → Console)
+  - Todas as imagens com atributo alt preenchido
+  - Meta tags preenchidas (title, description, og:image)
+  - Favicon incluído
+
+RESPONSIVIDADE
+
+  - 375px (iPhone SE): nada cortado ou sobreposto
+  - 768px (iPad): layout intermediário correto
+  - 1280px (desktop padrão): layout completo
+  - 1440px (wide): sem estiramentos
+
+PERFORMANCE
+
+  - Imagens comprimidas (use squoosh.app)
+  - Lazy loading ativado nas imagens da galeria
+  - Teste no PageSpeed Insights (meta: 80 ou mais)
+
+EXPERIÊNCIA DO USUÁRIO
+
+  - Formulário testado com envio real
+  - Todos os links internos funcionando
+  - Links externos abrem em nova aba
+  - Scroll suave funcionando
+  - Animações não travam em mobile
+
+ENTREGA
+
+  - Pasta organizada e nomeada corretamente
+  - Arquivo README.txt com instruções de hospedagem no Netlify
+  - ZIP da pasta criado para envio
+
+
+=============================================================
+16. ARMADILHAS E COMO EVITAR
+=============================================================
+
+Scope creep
+→ Defina no gig: "Inclui até X revisões. Mudanças de estrutura fora do
+  escopo acordado têm custo adicional."
+
+Imagens do cliente em baixa resolução
+→ Adicione na FAQ: "Please provide images at minimum 2000px wide for best
+  results."
+
+Cliente sem ideia de hospedagem
+→ Inclua um guia de 1 página sobre como subir no Netlify. Isso evita 80%
+  das confusões pós-entrega.
+
+Revisões infinitas
+→ Especifique o número de rodadas. "Rodada de revisão = uma lista
+  consolidada de mudanças, não múltiplas mensagens separadas."
+
+Site lento por imagens não comprimidas
+→ Sempre comprima as imagens antes de entregar. Meta: menos de 200kb por
+  imagem de galeria.
+
+Layout quebrado no Safari
+→ Teste sempre no Safari via BrowserStack (gratuito). Algumas propriedades
+  CSS se comportam diferente no Safari.
+
+Pedir review de forma invasiva
+→ Uma mensagem educada ao entregar: "Se o resultado superou suas
+  expectativas, ficaria grato por uma avaliação!" Nunca implore.
+
+Precificar muito baixo
+→ Abaixo de US$ 120 você atrai clientes de baixa qualidade e cria
+  ancoragem de preço difícil de reverter.
+
+
+=============================================================
+17. REFERÊNCIAS RÁPIDAS DE DESIGN
+=============================================================
+
+SNIPPETS DE CÓDIGO ESSENCIAIS
+
+CSS — variáveis base do dark mode:
+
+  :root {
+    --bg-primary:    #0A0A0A;
+    --bg-secondary:  #111827;
+    --text-primary:  #F9FAFB;
+    --text-secondary: #9CA3AF;
+    --accent:        #C9A84C;
+    --max-width:     1280px;
+    --section-padding: clamp(80px, 10vw, 120px);
+  }
+
+JS — Intersection Observer para fade-in ao scroll:
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+HTML — Formulário Formspree:
+
+  <form action="https://formspree.io/f/SEU_ID_AQUI" method="POST">
+    <input type="text"  name="name"  placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your email" required>
+    <select name="project_type">
+      <option value="cosmetics">Cosmetics / Beauty</option>
+      <option value="fashion">Fashion / Apparel</option>
+      <option value="tech">Tech / Electronics</option>
+      <option value="food">Food & Beverage</option>
+      <option value="other">Other</option>
+    </select>
+    <textarea name="message" placeholder="Tell me about your project">
+    </textarea>
+    <button type="submit">Send Message</button>
+  </form>
+
+SITES DE REFERÊNCIA VISUAL (inspiração)
+
+  awwwards.com         → busque "photography portfolio"
+  dribbble.com         → busque "product photographer website"
+  onepagelove.com      → portfólios de página única
+  behance.net          → busque "photographer portfolio 2025"
+
+FERRAMENTAS DE PRODUTIVIDADE
+
+  Claude / ChatGPT     → gerar HTML/CSS base, escrever copy
+  Squoosh.app          → compressão de imagens (gratuito)
+  PageSpeed Insights   → teste de performance (gratuito)
+  BrowserStack         → teste cross-browser (freemium)
+  Loom                 → gravar vídeos dos demos (gratuito até 5min)
+  Netlify              → deploy dos projetos (gratuito)
+  Formspree            → backend de formulários (gratuito até 50/mês)
+
+
+=============================================================
+RESUMO EXECUTIVO EM 10 PONTOS
+=============================================================
+
+ 1. Nicho: Sites de portfólio para fotógrafos de produto e e-commerce.
+
+ 2. Cliente ideal: Fotógrafo freelancer ou pequeno estúdio que atende
+    marcas DTC, Shopify e Amazon.
+
+ 3. Estética padrão: Dark mode editorial, tipografia serif e sans-serif,
+    galeria com hover overlay.
+
+ 4. Stack: HTML + CSS + Vanilla JS. Sem frameworks, sem builders.
+
+ 5. Antes do primeiro gig, crie 3 demos fictícios: cosméticos, moda e
+    tech, cada um com identidade visual distinta.
+
+ 6. Preços: Basic US$ 150 / Standard US$ 320 / Premium US$ 550. Nunca
+    abaixo de US$ 120.
+
+ 7. Gig no Fiverr: Categoria "Website Design", tag principal
+    "product photographer website".
+
+ 8. Primeiras vendas: Ofereça 2 a 3 slots a US$ 49 a 79 para conseguir
+    reviews, depois suba os preços.
+
+ 9. Diferencial: Código limpo, velocidade, especialização no nicho de
+    fotografia de produto, dark mode que faz as fotos brilharem.
+
+10. Meta de 90 dias: US$ 1.000 a 2.500 por mês com consistência e
+    estratégia correta de posicionamento.
+
+
+=============================================================
+Documento criado com base em análise de mercado 2025-2026.
+Atualize conforme você aprende com os primeiros clientes reais.
+=============================================================
